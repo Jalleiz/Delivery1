@@ -7,7 +7,7 @@ import calendar
 # Import af datamodel
 # ***************************************
 
-#githubpath = 'https://raw.githubusercontent.com/TueHellsternKea/dashdemo/main/data/'
+#githubpath = 'https://github.com/Jalleiz/Delivery1/tree/main/data'
 githubpath = './data/'
 
 # Import from Excel file, 4 different sheets
@@ -35,14 +35,8 @@ def get_data():
     # ***************************************
     
     order = pd.merge(df_order, df_products, how='left', on='product_id')
-    # print('This is orders after merging orders + products')
-    # print(order)
-
     order = pd.merge(order, df_employee, how='left', on='employee_id')
-    # print(order)
-    
     order = pd.merge(order, df_customers, how='left', on='customer_id')
-    # print(order)
 
     order['productname'] = order['productname'].replace(np.nan, 'unknown')
     order['type'] = order['type'].replace(np.nan, 'unknown')
@@ -57,8 +51,6 @@ def get_data():
                 'employee_id', 'emp_name', 
                 'orderdate', 'deliverydate', 'deliverytime', 'orderyear', 'ordermonth',
                 'total']]
-
-    # print(order)
 
     # Retuner til app.py
     return order
